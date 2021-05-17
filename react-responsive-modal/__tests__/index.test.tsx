@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { Modal } from '../src';
 
 describe('modal', () => {
@@ -438,6 +438,55 @@ describe('modal', () => {
         </Modal>
       );
       expect(document.body.style.overflow).toBe('');
+    });
+  });
+
+  describe('prop: focusTrapOptions', () => {
+    describe('default settings', () => {
+      it('should focus first tabbable element', () => {
+        const { queryByTestId } = render(
+          <Modal open onClose={() => null}>
+            <a href="https://google.com" data-testid="first-item">
+              modal content
+            </a>
+          </Modal>
+        );
+        expect(queryByTestId('first-item')).toHaveFocus();
+      });
+    });
+
+    describe('when focusOn is firstFocusableElement', () => {
+      it('should focus first tabbable element', () => {
+        const { queryByTestId } = render(
+          <Modal
+            open
+            onClose={() => null}
+            focusTrapOptions={{ focusOn: 'firstFocusableElement' }}
+          >
+            <a href="https://google.com" data-testid="first-item">
+              modal content
+            </a>
+          </Modal>
+        );
+        expect(queryByTestId('first-item')).toHaveFocus();
+      });
+    });
+
+    describe('when focusOn is modalRoot', () => {
+      it('should focus modal root', () => {
+        const { queryByTestId } = render(
+          <Modal
+            open
+            onClose={() => null}
+            focusTrapOptions={{ focusOn: 'modalRoot' }}
+          >
+            <a href="https://google.com" data-testid="first-item">
+              modal content
+            </a>
+          </Modal>
+        );
+        expect(queryByTestId('modal')).toHaveFocus();
+      });
     });
   });
 
