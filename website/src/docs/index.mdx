@@ -93,13 +93,13 @@ If you want to disable this behavior, set the `focusTrapped` prop to `false`.
 
 ```
 
-### Focus Trapped on modal root
+### Focus Trapped options
 
-You can also set to trap focus within the modal, but not to focus first visible element. To do this use `focusTrapOptions` prop and set `focusOn` to `modalRoot`.
+You can also set to trap focus within the modal, but decide where to put focus when opened. To do this use `focusTrapOptions` prop and set `focusOn` to a ref of an element you want to focus. In this example we focus on the modal root element.
 
-<ExampleRendered name="focusTrappedOnModalRoot" />
+<ExampleRendered name="focusTrappedOptions" />
 
-```js file=../examples/FocusTrappedOnModalRoot.tsx
+```js file=../examples/FocusTrappedOptions.tsx
 
 ```
 
